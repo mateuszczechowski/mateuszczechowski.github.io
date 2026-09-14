@@ -2,9 +2,16 @@
 
 Strona dewelopera i polityka prywatności aplikacji.
 
-- `privacy.html` — polityka prywatności Pit Lane Tycoon (EN + PL).
-  Adres podawany w App Store Connect i w AdMobie:
-  `https://mateuszczechowski.github.io/privacy.html`
+To repozytorium jest **korzeniem domeny**, a nie stroną którejkolwiek apki.
+Strony i polityki żyją w repozytoriach nazwanych po apkach —
+[`pitlane-site`](https://github.com/mateuszczechowski/pitlane-site)
+i [`weightfile`](https://github.com/mateuszczechowski/weightfile) — bo tylko
+jeden plik naprawdę musi leżeć tutaj.
+
+- `index.html` — rozdroże: lista apek z odnośnikami do ich stron i polityk.
+- `privacy.html` — **samo przekierowanie** na
+  `pitlane-site/privacy.html`. Zostaje, bo stary adres jest już wpisany
+  w AdMobie; skasowanie go zamieniłoby wpis w tamtej konsoli w 404.
 - `app-ads.txt` — autoryzacja sprzedawcy reklam (standard IAB). **Musi leżeć
   w korzeniu domeny** i to jest jedyny powód, dla którego ta strona jest
   repozytorium użytkownika, a nie projektu: Pages repo projektu daje adres
