@@ -112,8 +112,11 @@ main { overflow-x: clip; padding-bottom: 8px; }
 
 .deck {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 28px;
-  perspective: 1200px;
 }
+/* The slot never moves: it owns the pointer events, so a tilting card can't
+   slide out from under the cursor and start a leave/enter flicker. */
+.slot { display: flex; perspective: 1000px; }
+.slot > .card { flex: 1; }
 
 .card {
   --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 50%; --holo: 0;
@@ -125,15 +128,17 @@ main { overflow-x: clip; padding-bottom: 8px; }
   box-shadow: var(--shadow);
   transform: rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--tilt, 0deg));
   transform-style: preserve-3d;
-  transition: transform .5s cubic-bezier(.2, .9, .3, 1.2), box-shadow .3s;
+  transition: transform .6s cubic-bezier(.2, .8, .2, 1), box-shadow .3s;
   display: flex; flex-direction: column;
   isolation: isolate;
 }
-.card:nth-child(3n+1) { --tilt: -1.2deg; }
-.card:nth-child(3n+2) { --tilt: .8deg; }
-.card:nth-child(3n+3) { --tilt: -.5deg; }
-.card.is-live { transition: transform .08s linear, box-shadow .3s; }
-.card:hover { box-shadow: var(--shadow-lift); --tilt: 0deg; }
+.slot:nth-child(3n+1) .card { --tilt: -1.2deg; }
+.slot:nth-child(3n+2) .card { --tilt: .8deg; }
+.slot:nth-child(3n+3) .card { --tilt: -.5deg; }
+/* while the pointer drives it, JS eases the angle itself every frame —
+   a CSS transition on top would fight it */
+.card.is-live { transition: box-shadow .3s; }
+.slot:hover .card { box-shadow: var(--shadow-lift); --tilt: 0deg; }
 
 /* holographic foil following the pointer */
 .card::after {
@@ -181,7 +186,7 @@ main { overflow-x: clip; padding-bottom: 8px; }
   transform: translateZ(40px) rotate(-4deg);
   transition: transform .4s cubic-bezier(.3, 1.4, .5, 1);
 }
-.card:hover .art img { transform: translateZ(40px) rotate(0deg) scale(1.06); }
+.slot:hover .art img { transform: translateZ(40px) rotate(0deg) scale(1.06); }
 
 .body {
   background: var(--paper-card, #F6F2E8); color: #1F2A3A;
@@ -273,12 +278,12 @@ footer { padding: 72px 0 48px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .ticker-track { animation: ticker 36s linear infinite; }
-  .deck .card { animation: deal .7s cubic-bezier(.2, .9, .3, 1.15) backwards; }
-  .deck .card:nth-child(2) { animation-delay: .08s; }
-  .deck .card:nth-child(3) { animation-delay: .16s; }
-  .deck .card:nth-child(4) { animation-delay: .24s; }
-  .deck .card:nth-child(5) { animation-delay: .32s; }
-  .deck .card:nth-child(6) { animation-delay: .40s; }
+  .deck .slot { animation: deal .7s cubic-bezier(.2, .9, .3, 1.15) backwards; }
+  .deck .slot:nth-child(2) { animation-delay: .08s; }
+  .deck .slot:nth-child(3) { animation-delay: .16s; }
+  .deck .slot:nth-child(4) { animation-delay: .24s; }
+  .deck .slot:nth-child(5) { animation-delay: .32s; }
+  .deck .slot:nth-child(6) { animation-delay: .40s; }
   .stamp { animation: pulse 2.4s ease-in-out infinite; }
   @keyframes pulse { 50% { box-shadow: 0 0 0 3px rgba(31,42,58,.78), 0 0 22px 4px rgba(242,193,78,.45); } }
 }
@@ -296,5 +301,5 @@ footer { padding: 72px 0 48px; }
   .hero h1 .second { padding-left: .3em; }
   .deck { grid-template-columns: 1fr; gap: 28px; }
   .ticker-track { font-size: 18px; }
-  .card:nth-child(n) { --tilt: 0deg; }
+  .slot .card { --tilt: 0deg; }
 }
