@@ -112,6 +112,8 @@ main { overflow-x: clip; padding-bottom: 8px; }
 
 .deck {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 28px;
+  /* every row as tall as the tallest one, so the whole deck is one card size */
+  grid-auto-rows: 1fr;
 }
 /* The slot never moves: it owns the pointer events, so a tilting card can't
    slide out from under the cursor and start a leave/enter flicker. */
