@@ -4,11 +4,18 @@ Strona dewelopera i polityka prywatności aplikacji.
 
 To repozytorium jest **korzeniem domeny**, a nie stroną którejkolwiek apki.
 Strony i polityki żyją w repozytoriach nazwanych po apkach —
-[`pitlane-site`](https://github.com/mateuszczechowski/pitlane-site)
-i [`weightfile`](https://github.com/mateuszczechowski/weightfile) — bo tylko
+[`pitlane-site`](https://github.com/mateuszczechowski/pitlane-site),
+[`weightfile`](https://github.com/mateuszczechowski/weightfile),
+[`targetcounter-privacy`](https://github.com/mateuszczechowski/targetcounter-privacy)
+i [`sticta-support`](https://github.com/mateuszczechowski/sticta-support);
+Intimoment ma własną domenę, intimoment.com — bo tylko
 jeden plik naprawdę musi leżeć tutaj.
 
-- `index.html` — rozdroże: lista apek z odnośnikami do ich stron i polityk.
+- `index.html` — portfolio: apki jako kolekcjonerskie karty (paleta i Young
+  Serif ze Sticty), z linkami do App Store, stron i polityk, plus X i LinkedIn.
+  Ikony w `assets/` to kopie z App Store (`itunes.apple.com/lookup`), a
+  `sticta.png` z repo `sticta-support`. Nowa apka = nowa karta w `.deck`
+  i przenumerowanie „No. xx / yy”.
 - `privacy.html` — **samo przekierowanie** na
   `pitlane-site/privacy.html`. Zostaje, bo stary adres jest już wpisany
   w AdMobie; skasowanie go zamieniłoby wpis w tamtej konsoli w 404.
